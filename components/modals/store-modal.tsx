@@ -1,10 +1,6 @@
 "use client";
 
-import { useStoreModal } from "@/hooks/use-store-modal";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import Modal from "@/components/ui/modal";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,7 +9,14 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import Modal from "@/components/ui/modal";
+import { useStoreModal } from "@/hooks/use-store-modal";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import * as z from "zod";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -21,6 +24,7 @@ const formSchema = z.object({
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,7 +33,15 @@ export const StoreModal = () => {
     },
   });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/stores", values);
+      console.log(response.data);
+    } catch (error) {
+      toast.success("Store created");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <Modal
@@ -48,13 +60,19 @@ export const StoreModal = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Store name" {...field} />
+                    <Input
+                      placeholder="Store name"
+                      disabled={loading}
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
             />
             <div className="pt-6 space-x-2 flex items-center justify-end">
-              <Button type="submit">Add Store</Button>
+              <Button disabled={loading} type="submit">
+                Add Store
+              </Button>
             </div>
           </form>
         </Form>
