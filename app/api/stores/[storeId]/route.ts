@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-export async function UPDATE(
+export async function PATCH(
   req: Request,
   { params }: { params: { storeId: string } }
 ) {

@@ -13,9 +13,14 @@ const MainNav = ({
 
   const routes = [
     {
+      href: `/${params.storeId}`,
+      label: "Overview",
+      active: pathname === `/${params.storeId}`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
-      active: pathname.includes("/settings"),
+      active: pathname === `/${params.storeId}/settings`,
     },
   ];
   return (
