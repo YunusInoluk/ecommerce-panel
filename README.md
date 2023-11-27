@@ -1,10 +1,6 @@
-# Full Stack E-Commerce Store: Next.js 13 App Router, React, Tailwind, Prisma, MySQL
+# Full Stack E-Commerce Store Admin Panel: Next.js 13 App Router, React, Tailwind, Prisma, MySQL
 
-This is a repository for a Full Stack E-Commerce Store: Next.js 13 App Router, React, Tailwind, Prisma, MySQL
-
-For DEMO, use [Stripe Testing Cards](https://stripe.com/docs/testing)
-
-## MAKE SURE YOU HAVE [ADMIN](https://github.com/YunusInoluk/ecommerce-panel) SETUP FIRST!
+This is a repository for a Full Stack E-Commerce Store Admin Panel: Next.js 13 App Router, React, Tailwind, Prisma, MySQL
 
 Key Features:
 
